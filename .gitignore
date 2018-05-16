@@ -1,4 +1,6 @@
 # Project files
+client_secret.json
+credentials.json
 .vscode
 *.ini
 
