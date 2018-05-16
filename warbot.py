@@ -11,7 +11,7 @@ defaultConfig = config['DEFAULT']
 token = defaultConfig['token']
 prefix = defaultConfig['prefix']
 bot = commands.Bot(command_prefix=prefix)
-startup_extensions = ['commands.test_commands']
+startup_extensions = ['commands.test_commands', 'commands.war']
 
 @bot.event
 async def on_ready():
@@ -41,14 +41,14 @@ async def hello():
     """Responds as Ewan would."""
     await bot.say("Hello there")
 
-@bot.command(pass_context=True)
-async def defenses(ctx, *, user_name):
-    """Sends response as Embed object"""
-    em = discord.Embed(colour=discord.Colour.blue())
-    em.title = "Hello {}. Here are your assigned teams".format(user_name)
-    em.description = "1. CLS\n2. JTR\n3. Phoenix\n4. Nightsisters"
-#    await bot.say(em.title + "\n" + em.description)
-    await bot.send_message(ctx.message.channel, embed=em)
+#@bot.command(pass_context=True)
+#async def defenses(ctx, *, user_name):
+#    """Sends response as Embed object"""
+#    em = discord.Embed(colour=discord.Colour.blue())
+#    em.title = "Hello {}. Here are your assigned teams".format(user_name)
+#    em.description = "1. CLS\n2. JTR\n3. Phoenix\n4. Nightsisters"
+##    await bot.say(em.title + "\n" + em.description)
+#    await bot.send_message(ctx.message.channel, embed=em)
 
 if __name__ == "__main__":
     for extension in startup_extensions:
