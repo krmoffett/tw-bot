@@ -1,2 +1,3 @@
-# discordpy-test
-Testing ground for discord.py api
+# tw-bot
+### DEPENDENCIES
+discord.py - pip install discord.py
