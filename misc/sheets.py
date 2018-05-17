@@ -20,11 +20,8 @@ class Sheet():
                                              range=RANGE_NAME).execute()
         values = result.get('values', [])
         if not values:
-            print("No data found")
+            return None 
         else:
-            print("Player, Characters, Shpis")
-            for row in values:
-                print('%s, %s, %s' % (row[0], row[1], row[2]))
-
-newsheet = Sheet()
-newsheet.get_data()
+            return values 
+sheet = Sheet()
+sheet.get_data()
