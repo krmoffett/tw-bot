@@ -23,9 +23,27 @@ class WarCommands():
                     em.add_field(name="Ships", value=ships)
                     await self.bot.send_message(ctx.message.channel, embed=em)
                     return
-            await self.bot.say("{} not found in list")
+            await self.bot.say("{} not found in list".format(user_name))
         else:
-            await self.bot.say("No data found for {}".format(user_name))
+            await self.bot.say("No data found")
+
+    @commands.command(pass_context=True)
+    async def alldefenses(self, ctx):
+        """Lists the defensive teams for all players"""
+        sheet = Sheet()
+        sheet_data = sheet.get_data()
+        if sheet_data != None:
+            player_list = []
+            for row in sheet_data:
+                new_player = Player(row[0], row[1], row[2])
+                player_list.append(new_player)
+            em = discord.Embed(title="Here is the list of everyone's teams for this TW:")
+            for player in player_list:
+                em.add_field(name=player.name, value=(player.assigned_chars + " --- " + player.assigned_ships))
+            await self.bot.send_message(ctx.message.channel, embed=em)
+            return
+        else:
+            await self.bot.say("No data found")
 
     @commands.command(pass_context=True)
     async def map(self, ctx):
