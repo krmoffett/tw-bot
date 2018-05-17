@@ -23,5 +23,3 @@ class Sheet():
             return None 
         else:
             return values 
-sheet = Sheet()
-sheet.get_data()
