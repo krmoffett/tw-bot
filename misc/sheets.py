@@ -23,3 +23,14 @@ class Sheet():
             return None 
         else:
             return values 
+    
+    def get_squads(self):
+        SPREADSHEET_ID = '1L8lY0i3DAB9xeMn7BaoFa7cplx-X4l8OAVxVC2tsNeQ'
+        RANGE_NAME = 'SquadAssignments!A2:B'
+        result = self.service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID,
+                                             range=RANGE_NAME).execute()
+        values = result.get('values', [])
+        if not values:
+            return None 
+        else:
+            return values 
