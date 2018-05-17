@@ -32,15 +32,19 @@ class WarCommands():
         """Lists the defensive teams for all players"""
         sheet = Sheet()
         sheet_data = sheet.get_data()
+        description1 = "***Here's everyone's defense assignments for TW:***\n"
+        description2 = ""
         if sheet_data != None:
             player_list = []
             for row in sheet_data:
                 new_player = Player(row[0], row[1], row[2])
                 player_list.append(new_player)
-            em = discord.Embed(title="Here is the list of everyone's teams for this TW:")
-            for player in player_list:
-                em.add_field(name=player.name, value=(player.assigned_chars + " --- " + player.assigned_ships))
-            await self.bot.send_message(ctx.message.channel, embed=em)
+            for player in player_list[0:25]:
+                description1 = description1 + "**" + player.name + "**" + "\n\t" + player.assigned_chars + " --- " + player.assigned_ships + "\n"
+            for player in player_list[25:]:
+                description2 = description2 + "**" + player.name + "**" + "\n\t" + player.assigned_chars + " --- " + player.assigned_ships + "\n"
+            await self.bot.send_message(ctx.message.channel, description1)
+            await self.bot.send_message(ctx.message.channel, description2)
             return
         else:
             await self.bot.say("No data found")
