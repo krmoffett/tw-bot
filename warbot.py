@@ -18,6 +18,8 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
+    game = discord.Game(name="{}help".format(prefix))
+    bot.change_status(game=game)
 
 @bot.command(hidden=True)
 async def load(extension_name : str):
