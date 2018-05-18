@@ -3,7 +3,7 @@ from misc.sheets import Sheet
 from discord.ext import commands
 from misc.base import Player
 
-class WarCommands():
+class TerritoryWar():
     def __init__(self, bot):
         self.bot = bot
 
@@ -64,4 +64,4 @@ class WarCommands():
         await self.bot.send_message(ctx.message.channel, embed=em)
 
 def setup(bot):
-    bot.add_cog(WarCommands(bot))
+    bot.add_cog(TerritoryWar(bot))
