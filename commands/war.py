@@ -56,9 +56,11 @@ class WarCommands():
         em.set_image(url='https://cdn.discordapp.com/attachments/405606408344829952/405606490322370560/26106.jpeg')
         sheet = Sheet()
         sheet_data = sheet.get_squads()
+        description = ""
         if sheet_data != None:
             for row in sheet_data:
-                em.add_field(name=row[0], value=row[1], inline=True)
+                description += "**" + row[0] + ":** " + row[1] + "\n"
+        em.description = description
         await self.bot.send_message(ctx.message.channel, embed=em)
 
 def setup(bot):
