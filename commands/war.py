@@ -50,6 +50,15 @@ class TerritoryWar():
             return
         else:
             await self.bot.say("No data found")
+    
+    @alldefenses.error
+    async def alldefences_handler(self, error, ctx):
+        """Handler for alldefenses command"""
+        print ("error:{}".format(error))
+        print ("ctx: {}".format(ctx))
+        if isinstance(error, discord.ext.commands.errors.CheckFailure):
+            print ("check failuer")
+            await self.bot.say("You do not have permission to use this command")
 
     @commands.command(pass_context=True)
     async def map(self, ctx):
