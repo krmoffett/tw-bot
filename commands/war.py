@@ -15,13 +15,16 @@ class TerritoryWar():
         if sheet_data != None:
             for row in sheet_data:
                 if user_name.lower() in row[0].lower():
-                    player = Player(row[0], row[1], row[2])        
+                    player = Player(row[0], row[1], row[2], row[3])        
                     chars = player.get_chars()
                     ships = player.get_ships()
-                    em = discord.Embed(title="Hello {}. Here are your assigned teams:".format(player.get_name()))
-                    em.add_field(name="Characters", value=chars)
-                    em.add_field(name="Ships", value=ships)
-                    await self.bot.send_message(ctx.message.channel, embed=em)
+                    if player.is_participating() == "TRUE":
+                        em = discord.Embed(title="Hello {}. Here are your assigned teams:".format(player.get_name()))
+                        em.add_field(name="Characters", value=chars)
+                        em.add_field(name="Ships", value=ships)
+                        await self.bot.send_message(ctx.message.channel, embed=em)
+                    else:
+                        await self.bot.say("Hello {}. You are not participating in this Territory War".format(player.get_name()))
                     return
             await self.bot.say("{} not found in list".format(user_name))
         else:
@@ -39,8 +42,9 @@ class TerritoryWar():
         if sheet_data != None:
             player_list = []
             for row in sheet_data:
-                new_player = Player(row[0], row[1], row[2])
-                player_list.append(new_player)
+                new_player = Player(row[0], row[1], row[2], row[3])
+                if new_player.is_participating() == "TRUE":
+                    player_list.append(new_player)
             for player in player_list[0:25]:
                 description1 = description1 + "**" + player.name + "**" + "\n\t" + player.assigned_chars + " --- " + player.assigned_ships + "\n"
             for player in player_list[25:]:
@@ -54,10 +58,7 @@ class TerritoryWar():
     @alldefenses.error
     async def alldefences_handler(self, error, ctx):
         """Handler for alldefenses command"""
-        print ("error:{}".format(error))
-        print ("ctx: {}".format(ctx))
         if isinstance(error, discord.ext.commands.errors.CheckFailure):
-            print ("check failuer")
             await self.bot.say("You do not have permission to use this command")
 
     @commands.command(pass_context=True)

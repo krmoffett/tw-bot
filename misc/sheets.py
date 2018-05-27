@@ -20,7 +20,7 @@ class Sheet():
     
     def get_data(self):
         SPREADSHEET_ID = self.sheet_id
-        RANGE_NAME = 'Assignments!A2:C'
+        RANGE_NAME = 'Assignments!A2:D'
         result = self.service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID,
                                              range=RANGE_NAME).execute()
         values = result.get('values', [])
