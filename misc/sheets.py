@@ -39,3 +39,14 @@ class Sheet():
             return None 
         else:
             return values 
+
+    def get_raid_schedule(self):
+        SPREADSHEET_ID = self.sheet_id
+        RANGE_NAME =  'Raids!A2:B5'
+        result = self.service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID,
+                                             range=RANGE_NAME).execute()
+        values = result.get('values', [])
+        if not values:
+            return None
+        else:
+            return values

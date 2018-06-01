@@ -10,7 +10,7 @@ defaultConfig = config['DEFAULT']
 token = defaultConfig['token']
 prefix = defaultConfig['prefix']
 bot = commands.Bot(command_prefix=prefix)
-startup_extensions = ['commands.war']
+startup_extensions = ['commands.war', 'commands.raids']
 
 @bot.event
 async def on_ready():
